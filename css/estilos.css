@@ -3,8 +3,8 @@
 }
 :root {
   --color-primario: #fff;
-  --color-secundario: #00afe9;
-  --color-lineas: #000;
+  --color-secundario: #dc3545;
+  --color-lineas: #27261e;
   --color-primario-dark: #27261e;
   --color-lineas-dark: #fff;
 }
@@ -46,12 +46,16 @@ svg > * {
 .casilla .letra {
   opacity: 0;
   transition: opacity 500ms;
+  color: var(--color-lineas);
 }
 .casilla.show .letra {
   opacity: 1;
 }
 body.dark .casillas .casilla {
   border-bottom: 2px solid var(--color-lineas-dark);
+}
+body.dark .casillas .casilla .letra {
+  color: var(--color-lineas-dark);
 }
 .input-letra {
   margin-right: 15px;
