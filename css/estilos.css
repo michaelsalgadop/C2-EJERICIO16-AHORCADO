@@ -7,6 +7,7 @@
   --color-lineas: #27261e;
   --color-primario-dark: #27261e;
   --color-lineas-dark: #fff;
+  --color-victoria: #39ee33;
 }
 body {
   margin: 0;
@@ -43,7 +44,8 @@ svg > * {
   margin-left: 20px;
 }
 .letra-usada,
-.casilla {
+.casilla,
+.final-juego {
   font-size: 30px;
 }
 .letra-usada {
@@ -76,6 +78,15 @@ body.dark .letras-usadas .letra-usada {
   outline: none;
   width: 60px;
   font-size: 18px;
+}
+.final-juego {
+  font-weight: bold;
+}
+.final-juego.victoria {
+  color: var(--color-victoria);
+}
+.final-juego.derrota {
+  color: var(--color-secundario);
 }
 .boton-modo {
   position: fixed;

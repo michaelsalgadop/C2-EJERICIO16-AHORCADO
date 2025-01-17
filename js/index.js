@@ -5,7 +5,11 @@ const botonModo = document.querySelector(".boton-modo");
 const casillas = document.querySelector(".casillas");
 const inputLetra = document.querySelector(".input-letra");
 const buzonLetras = document.querySelector(".letras-usadas");
+const finalJuego = document.querySelector(".final-juego");
+let letrasPalabra;
 let palabraAleatoria = "";
+let numeroIntentos = 0;
+const totalIntentos = 11;
 
 botonModo.addEventListener("click", (event) => {
   event.preventDefault();
@@ -55,6 +59,45 @@ const caracterExiste = (caracter) =>
       ? elemento.textContent.toLowerCase() === caracter.toLowerCase()
       : elemento.textContent === caracter
   );
+const finalizarJuego = (finalizadoCorrectamente) => {
+  inputLetra.setAttribute("disabled", "true");
+  finalJuego.textContent = finalizadoCorrectamente
+    ? `Enhorabuena, la palabra era: ${palabraAleatoria}`
+    : `Lo sentimos, ha finalizado el juego!`;
+  finalJuego.classList.add(finalizadoCorrectamente ? "victoria" : "derrota");
+};
+const pintarMunyeco = () => {
+  document.querySelector(`.stage${numeroIntentos}`).classList.add("show");
+};
+const comprobarLetra = (letraEscrita) => {
+  let ocurrencia = false;
+  for (const casilla of casillas.querySelectorAll(
+    ".casilla:not(.casilla-dummy)"
+  )) {
+    const letra = casilla.querySelector(".letra");
+    if (letra.textContent.toLowerCase() === letraEscrita.toLowerCase()) {
+      if (!ocurrencia) ocurrencia = true;
+      casilla.classList.add("show");
+    }
+  }
+  return ocurrencia;
+};
+const contarFallo = () => {
+  ++numeroIntentos;
+  pintarMunyeco();
+  if (numeroIntentos === totalIntentos) return finalizarJuego(false);
+};
+const comprobarPalabra = () => {
+  let mostradas = true;
+  for (const casilla of casillas.querySelectorAll(
+    ".casilla:not(.casilla-dummy)"
+  )) {
+    if (!casilla.classList.contains("show") && mostradas) {
+      mostradas = false;
+    }
+  }
+  return mostradas;
+};
 inputLetra.addEventListener("input", (event) => {
   try {
     let letraEscrita = event.target.value;
@@ -62,12 +105,16 @@ inputLetra.addEventListener("input", (event) => {
       inputLetra.value = "";
       if (letraEscrita.length > 1) letraEscrita = letraEscrita.charAt(0);
       if (caracterExiste(letraEscrita)) return;
-      if (checkLetra(letraEscrita)) {
-        console.log("letra introducida");
-      } else {
-        console.log("no es una letra");
-      }
       guardarCaracter(letraEscrita);
+      if (checkLetra(letraEscrita)) {
+        if (!comprobarLetra(letraEscrita)) {
+          contarFallo();
+        } else if (comprobarPalabra()) {
+          finalizarJuego(true);
+        }
+      } else {
+        contarFallo();
+      }
     }, 500);
   } catch (error) {
     console.error(error.message);
