@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --color-primario: #fff;
+  --color-secundario: #00afe9;
+  --color-lineas: #000;
+  --color-primario-dark: #27261e;
+  --color-lineas-dark: #fff;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-primario);
+}
+body.dark {
+  background-color: var(--color-primario-dark);
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+svg.hangman {
+  width: 18.75rem;
+  height: 18.75rem;
+}
+svg > * {
+  stroke: var(--color-secundario);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+  transition: 0.25s;
+}
+.casillas .casilla + .casilla {
+  margin-left: 20px;
+}
+.casilla {
+  border-bottom: 2px solid var(--color-lineas);
+  font-size: 30px;
+  min-width: 20px;
+}
+.casilla-dummy {
+  display: none;
+}
+.casilla .letra {
+  opacity: 0;
+  transition: opacity 500ms;
+}
+.casilla.show .letra {
+  opacity: 1;
+}
+body.dark .casillas .casilla {
+  border-bottom: 2px solid var(--color-lineas-dark);
+}
+.input-letra {
+  margin-right: 15px;
+  outline: none;
+}
+.boton-enviar {
+  background-color: var(--color-secundario);
+  color: #fff;
+}
+.boton-enviar:hover {
+  color: #fff;
+}
+.boton-modo {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--color-lineas);
+  width: 50px;
+  height: 50px;
+}
+.boton-modo > .icono {
+  font-size: 35px;
+  color: var(--color-lineas);
+}
+body.dark .boton-modo {
+  border: 2px solid var(--color-lineas-dark);
+}
+body.dark .boton-modo > .icono {
+  color: var(--color-lineas-dark);
+}
