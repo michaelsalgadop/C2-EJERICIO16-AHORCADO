@@ -32,15 +32,29 @@ svg > * {
   stroke-miterlimit: 10;
   transition: 0.25s;
 }
-.casillas .casilla + .casilla {
+.stage {
+  visibility: hidden;
+}
+.stage.show {
+  visibility: visible;
+}
+.casillas .casilla + .casilla,
+.letras-usadas .letra-usada + .letra-usada {
   margin-left: 20px;
+}
+.letra-usada,
+.casilla {
+  font-size: 30px;
+}
+.letra-usada {
+  color: var(--color-lineas);
 }
 .casilla {
   border-bottom: 2px solid var(--color-lineas);
-  font-size: 30px;
   min-width: 20px;
 }
-.casilla-dummy {
+.casilla-dummy,
+.letra-usada-dummy {
   display: none;
 }
 .casilla .letra {
@@ -54,19 +68,14 @@ svg > * {
 body.dark .casillas .casilla {
   border-bottom: 2px solid var(--color-lineas-dark);
 }
-body.dark .casillas .casilla .letra {
+body.dark .casillas .casilla .letra,
+body.dark .letras-usadas .letra-usada {
   color: var(--color-lineas-dark);
 }
 .input-letra {
-  margin-right: 15px;
   outline: none;
-}
-.boton-enviar {
-  background-color: var(--color-secundario);
-  color: #fff;
-}
-.boton-enviar:hover {
-  color: #fff;
+  width: 60px;
+  font-size: 18px;
 }
 .boton-modo {
   position: fixed;
